@@ -1,0 +1,10 @@
+body {
+    background-color: black;
+    text-align: center;
+}
+#screen {
+    background-color: white;
+    image-rendering: pixelated;
+    width: 256px;
+    height: 256px;
+}
