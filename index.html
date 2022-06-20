@@ -6,9 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Art to JollyData</title>
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="lzstring.min.js"></script>
 </head>
 <body>
-    <canvas width="8" height="8" id="screen"></canvas>
+    <div id="container">
+        <canvas id="screen"></canvas>
+        <div id="cursor"></div>
+    </div>
+    <div class="tool">
+        <p>Color:</p>
+        <input id="color" value="#888888" type="color">
+    </div>
+    <div class="tool">
+        <p>Image Import:</p>
+        <input id="image" type="file" accept="image/png">
+    </div>
+    <br>
+    <button id="generate">Generate!</button>
+    <br>
+    <textarea id="output"></textarea>
     <script src="main.js"></script>
 </body>
 </html>
