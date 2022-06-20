@@ -107,6 +107,7 @@ function generateOutput() {
         $('generate').style.pointerEvents = 'all';
     }, 2000)
     document.execCommand('copy');
+    $('output').style.display = 'inline-block';
 };
 
 $('size').oninput = function() {

@@ -78,11 +78,6 @@ body {
     margin: 0;
     cursor: pointer;
 }
-#output {
-    opacity: 0;
-    position: fixed;
-    top: 100%;
-}
 #generate {
     font-size: 30px;
     padding: 15px;
@@ -96,6 +91,12 @@ body {
 #generate:active {
     transform: translateY(10px);
     box-shadow: 0px 5px 0px -5px #888, 0px 5px 0px black;
+}
+#output {
+    margin: 15px;
+    width: 500px;
+    height: 150px;
+    display: none;
 }
 hr {
     margin: 15px auto;
