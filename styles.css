@@ -7,6 +7,9 @@
     font-family: "Montserrat";
     color: black;
 }
+h1 {
+    font-size: 45px;
+}
 p {
     margin: 5px;
     text-decoration: underline;
@@ -80,4 +83,9 @@ body {
     border: 5px solid black;
     cursor: pointer;
     transition: all 0.2s ease-out;
+    box-shadow: 0px 15px 0px -5px #888, 0px 15px 0px black;
+}
+#generate:active {
+    transform: translateY(10px);
+    box-shadow: 0px 5px 0px -5px #888, 0px 5px 0px black;
 }

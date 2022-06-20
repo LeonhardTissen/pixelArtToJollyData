@@ -95,10 +95,12 @@ function generateOutput() {
     $('output').focus();
     $('output').select();
     $('generate').innerText = 'Copied to clipboard!';
-    $('generate').style.backgroundColor = '#2B2';
+    $('generate').style.color = '#282';
+    $('generate').style.pointerEvents = 'none';
     setTimeout(function() {
         $('generate').innerText = 'Generate';
-        $('generate').style.backgroundColor = '';
+        $('generate').style.color = '';
+        $('generate').style.pointerEvents = 'all';
     }, 2000)
     document.execCommand('copy');
 };
