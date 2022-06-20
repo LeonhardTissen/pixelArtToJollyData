@@ -20,6 +20,7 @@ let mouse = [false, false]
 let colordata;
 let finished_pixels;
 let finalized_pixels;
+let igm = 8;
 
 function generateCanvas(sizeParam) {
     size = sizeParam;
@@ -36,8 +37,6 @@ function generateCanvas(sizeParam) {
 function generateArray() {
     return Array(size).fill().map(() => Array(size).fill(0));
 };
-
-$('size').value = 16;
 
 generateCanvas(16);
 
@@ -113,6 +112,12 @@ function generateOutput() {
 $('size').oninput = function() {
     generateCanvas(parseInt(this.value));
 };
+$('size').value = 16;
+$('igm').oninput = function() {
+    igm = this.value;
+    $('igmtext').innerText = igm;
+}
+$('igm').value = 8;
 
 let current_x;
 let current_y;
@@ -132,8 +137,6 @@ function checkPixel(x_diff, y_diff) {
     };
     return false;
 };
-
-const igm = 8;
 
 function parsePixel(x, y) {
     scanned_pixel = colordata[y][x];

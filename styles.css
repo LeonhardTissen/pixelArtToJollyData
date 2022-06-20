@@ -106,6 +106,9 @@ footer {
     font-size: 25px;
     color: #666;
 }
-#sizetext {
+#sizetext, #igmtext {
     font-size: 30px;
+}
+#love {
+    pointer-events: none;
 }

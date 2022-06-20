@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixel Art to JollyData</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="love.png">
     <script type="text/javascript" src="lzstring.min.js"></script>
 </head>
 <body>
@@ -31,11 +32,14 @@
             <input id="size" min="4" max="32" step="4" value="16" type="range">
         </div>
         <div class="tool">
+            <p>In-Game Size:</p>
+            <span id="igmtext">8</span>
+            <input id="igm" min="1" max="64" step="1" value="8" type="range">
         </div>
     </div>
     <button id="generate">Generate!</button>
     <hr>
-    <footer>Made with <img src="heart.png"> by Warze</footer>
+    <footer>Made with <img id="love" src="love.png"> by Warze</footer>
     <textarea id="output"></textarea>
     <script src="main.js"></script>
 </body>
