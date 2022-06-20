@@ -215,7 +215,7 @@ function parsePixel(x, y) {
         if (current_x === x && current_y === y) {
             active = false;
         };
-        if (points.length > 100) {
+        if (points.length > 1000) {
             active = false;
         };
     };
