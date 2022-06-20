@@ -13,26 +13,33 @@ const ctx = $('screen').getContext('2d');
 
 let x = 0;
 let y = 0;
-const scale = 32;
+let size = 16;
+let scale = 32;
 let color = '#888888';
 let mouse = [false, false]
 let colordata;
 let finished_pixels;
 let finalized_pixels;
 
-function generateCanvas(width, height) {
-    $('screen').width = width;
-    $('screen').height = height;
-    $('container').style.width = width * scale + "px";
-    $('container').style.height = height * scale + "px";
-    colordata = generateArray(width, height);
+function generateCanvas(sizeParam) {
+    size = sizeParam;
+    $('screen').width = size;
+    $('screen').height = size;
+    $('sizetext').innerText = size;
+    scale = 512 / size;
+    $('screen').style.backgroundSize = `${1024/size}px`;
+    $('cursor').style.width = 512 / size + "px";
+    $('cursor').style.height = 512 / size + "px";
+    colordata = generateArray();
 };
 
-function generateArray(width, height) {
-    return Array(width).fill().map(() => Array(height).fill(0));
+function generateArray() {
+    return Array(size).fill().map(() => Array(size).fill(0));
 };
 
-generateCanvas(16,16 );
+$('size').value = 16;
+
+generateCanvas(16);
 
 $('container').onmousemove = function(e) {
     x = Math.floor(e.layerX / scale);
@@ -81,13 +88,11 @@ function updateDraw() {
 let output_obj;
 
 function generateOutput() {
-    const width = cvs.width;
-    const height = cvs.height;
     output_obj = {objects: []};
-    finished_pixels = generateArray(width, height);
-    finalized_pixels = generateArray(width, height);
-    for (let y = 0; y < height; y ++) {
-        for (let x = 0; x < width; x ++) {
+    finished_pixels = generateArray(size);
+    finalized_pixels = generateArray(size);
+    for (let y = 0; y < size; y ++) {
+        for (let x = 0; x < size; x ++) {
             parsePixel(x, y);
         };
     };
@@ -103,6 +108,10 @@ function generateOutput() {
         $('generate').style.pointerEvents = 'all';
     }, 2000)
     document.execCommand('copy');
+};
+
+$('size').oninput = function() {
+    generateCanvas(parseInt(this.value));
 };
 
 let current_x;
@@ -226,7 +235,7 @@ $('image').oninput = function() {
         img.src = this.result;
         img.onload = function() {
             ctx.drawImage(img, 0, 0);
-            const data = ctx.getImageData(0, 0, cvs.width, cvs.height).data;
+            const data = ctx.getImageData(0, 0, size, size).data;
             let p = 0;
             for (let i = 0; i < data.length; i += 4) {
                 if (data[i + 3] !== 0) {

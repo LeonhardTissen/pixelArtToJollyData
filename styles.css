@@ -6,6 +6,8 @@
 * {
     font-family: "Montserrat";
     color: black;
+    user-select: none;
+    cursor: default;
 }
 h1 {
     font-size: 45px;
@@ -27,13 +29,16 @@ body {
     position: relative;
     border: 5px solid black;
     border-radius: 5px;
-    margin: 5px auto;
+    margin: 0px auto;
+    cursor: crosshair;
 }
 #screen {
     background-image: url(bg.png);
     image-rendering: pixelated;
     width: 100%;
     height: 100%;
+    transform-origin: top left;
+    pointer-events: none;
 }
 #cursor {
     position: absolute;
@@ -50,6 +55,9 @@ body {
     background-color: red;
     position: absolute;
     border-radius: 50%;
+}
+.toolrow {
+    margin-top: 5px;
 }
 .tool {
     display: inline-block;
@@ -78,14 +86,26 @@ body {
 #generate {
     font-size: 30px;
     padding: 15px;
-    margin: 5px;
     border-radius: 4px;
     border: 5px solid black;
     cursor: pointer;
     transition: all 0.2s ease-out;
+    margin: 5px;
     box-shadow: 0px 15px 0px -5px #888, 0px 15px 0px black;
 }
 #generate:active {
     transform: translateY(10px);
     box-shadow: 0px 5px 0px -5px #888, 0px 5px 0px black;
+}
+hr {
+    margin: 15px auto;
+    border: 1px solid #BBB;
+    width: 500px;
+}
+footer {
+    font-size: 25px;
+    color: #666;
+}
+#sizetext {
+    font-size: 30px;
 }

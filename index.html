@@ -14,17 +14,28 @@
         <canvas id="screen"></canvas>
         <div id="cursor"></div>
     </div>
-    <div class="tool">
-        <p>Color:</p>
-        <input id="color" value="#888888" type="color">
+    <div class="toolrow">
+        <div class="tool">
+            <p>Color:</p>
+            <input id="color" value="#888888" type="color">
+        </div>
+        <div class="tool">
+            <p>Image Import:</p>
+            <input id="image" type="file" accept="image/png">
+        </div>
     </div>
-    <div class="tool">
-        <p>Image Import:</p>
-        <input id="image" type="file" accept="image/png">
+    <div class="toolrow">
+        <div class="tool">
+            <p>Canvas Size:</p>
+            <span id="sizetext">16</span>
+            <input id="size" min="4" max="32" step="4" value="16" type="range">
+        </div>
+        <div class="tool">
+        </div>
     </div>
-    <br>
     <button id="generate">Generate!</button>
-    <br>
+    <hr>
+    <footer>Made with <img src="heart.png"> by Warze</footer>
     <textarea id="output"></textarea>
     <script src="main.js"></script>
 </body>
