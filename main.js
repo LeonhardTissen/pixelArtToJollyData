@@ -42,8 +42,8 @@ $('size').value = 16;
 generateCanvas(16);
 
 $('container').onmousemove = function(e) {
-    x = Math.floor(e.layerX / scale);
-    y = Math.floor(e.layerY / scale);
+    x = Math.floor((e.layerX - 5) / scale);
+    y = Math.floor((e.layerY - 5) / scale);
     if (x < 0 || x >= cvs.width || y < 0 || y >= cvs.height) {
         return;
     }
