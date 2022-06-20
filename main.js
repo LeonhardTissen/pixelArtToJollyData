@@ -242,7 +242,7 @@ $('image').oninput = function() {
             let p = 0;
             for (let i = 0; i < data.length; i += 4) {
                 if (data[i + 3] !== 0) {
-                    colordata[Math.floor(p / cvs.width)][p % cvs.width] = rgbToHex(data[i], data[i + 1], data[i + 2]);
+                    colordata[Math.floor(p / cvs.width)][p % cvs.width] = rgbToHex(data[i], data[i + 1], data[i + 2], data[i + 3]);
                 };
                 p ++;
             };
@@ -256,8 +256,8 @@ function componentToHex(c) {
     return hex.length == 1 ? "0" + hex : hex;
 };
   
-function rgbToHex(r, g, b) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+function rgbToHex(r, g, b, a = 255) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(a);
 };
 
 $('generate').onclick = generateOutput;
