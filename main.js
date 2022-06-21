@@ -101,6 +101,7 @@ function generateOutput() {
             parsePixel(x, y);
         };
     };
+    document.body.appendChild(pvs);
     $('output').value = compress(output_obj);
     $('output').focus();
     $('output').select();
@@ -265,7 +266,11 @@ function putOnPastry(color, points) {
             if (colordata[check_y][check_x] === rgbToHex(data[i], data[i + 1], data[i + 2], data[i + 3])) {
                 finished_pixels[check_y][check_x] = 1;
             };
-        };
+        } else {
+            if (colordata[check_y][check_x] !== rgbToHex(data[i], data[i + 1], data[i + 2], data[i + 3])) {
+                finished_pixels[check_y][check_x] = 0;
+            };
+        }
         index ++;
     };
 };
