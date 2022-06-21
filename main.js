@@ -11,6 +11,9 @@ function decompress(jollydata) {
 const cvs = $('screen');
 const ctx = $('screen').getContext('2d');
 
+const pvs = document.createElement('canvas');
+const ptx = pvs.getContext('2d');
+
 let x = 0;
 let y = 0;
 let size = 16;
@@ -26,6 +29,8 @@ function generateCanvas(sizeParam) {
     size = sizeParam;
     $('screen').width = size;
     $('screen').height = size;
+    pvs.width = size;
+    pvs.height = size;
     $('sizetext').innerText = size;
     scale = 512 / size;
     $('screen').style.backgroundSize = `${1024/size}px`;
@@ -90,6 +95,7 @@ function generateOutput() {
     output_obj = {objects: []};
     finished_pixels = generateArray(size);
     finalized_pixels = generateArray(size);
+    ptx.clearRect(0, 0, size, size);
     for (let y = 0; y < size; y ++) {
         for (let x = 0; x < size; x ++) {
             parsePixel(x, y);
@@ -221,16 +227,53 @@ function parsePixel(x, y) {
         };
     };
 
+    putOnPastry(scanned_pixel, points);
+
     finished_pixels[y][x] = 1;
     finalized_pixels = JSON.parse(JSON.stringify(finished_pixels));
     const new_obj = [6,0,0,0,"","",0,scanned_pixel,"#000",1,null,points,null,null,null,null,"",0,0,0,0,"",true]
     output_obj.objects.push(new_obj);
 };
 
+function putOnPastry(color, points) {
+    let min_x = size;
+    let min_y = size;
+    let max_x = 0;
+    let max_y = 0;
+    for (let i = 0; i < points.length; i ++) {
+        const x = points[i].x / igm;
+        const y = points[i].y / igm;
+        min_x = Math.min(min_x, x)
+        max_x = Math.max(max_x, x)
+        min_y = Math.min(min_y, y)
+        max_y = Math.max(max_y, y)
+        if (i === 0) {
+            ptx.beginPath(x, y);
+        };
+        ptx.lineTo(x, y);
+    };
+    ptx.fillStyle = color;
+    ptx.fill();
+    const d_width = max_x - min_x;
+    const d_height = max_y - min_y;
+    const data = ptx.getImageData(min_x, min_y, d_width, d_height).data;
+    let index = 0;
+    for (let i = 0; i < data.length; i += 4) {
+        const check_x = min_x + (index % d_width);
+        const check_y = min_y + Math.floor(index / d_width);
+        if (finished_pixels[check_y][check_x] === 0) {
+            if (colordata[check_y][check_x] === rgbToHex(data[i], data[i + 1], data[i + 2], data[i + 3])) {
+                finished_pixels[check_y][check_x] = 1;
+            };
+        };
+        index ++;
+    };
+};
+
 $('color').oninput = function() {
     color = this.value;
 };
-$('color').value = '#888888'
+$('color').value = '#888888';
 
 $('image').oninput = function() {
     const reader = new FileReader();
@@ -258,7 +301,8 @@ function componentToHex(c) {
 };
   
 function rgbToHex(r, g, b, a = 255) {
-    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b) + componentToHex(a);
+    const alpha_append = (a === 255 ? '' : componentToHex(a));
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b) + alpha_append;
 };
 
 $('generate').onclick = generateOutput;
