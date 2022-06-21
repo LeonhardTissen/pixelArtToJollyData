@@ -113,3 +113,7 @@ footer {
 #love {
     pointer-events: none;
 }
+#shapecount {
+    font-size: 20px;
+    text-decoration: none;
+}

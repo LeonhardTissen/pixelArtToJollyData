@@ -101,6 +101,7 @@ function generateOutput() {
             parsePixel(x, y);
         };
     };
+    $('shapecount').innerText = output_obj.objects.length + " shapes.";
     $('output').value = compress(output_obj);
     $('output').focus();
     $('output').select();
