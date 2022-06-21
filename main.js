@@ -101,7 +101,6 @@ function generateOutput() {
             parsePixel(x, y);
         };
     };
-    document.body.appendChild(pvs);
     $('output').value = compress(output_obj);
     $('output').focus();
     $('output').select();
